@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getFetchCurrencies } from '../redux/actions';
+import { getFetchCurrencies, expensesIncluded } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
+    id: 0,
     value: '',
     description: '',
     currency: '',
     method: '',
     tag: '',
+    // expenses: [],
   };
 
   async componentDidMount() {
@@ -20,6 +22,28 @@ class WalletForm extends Component {
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
+  };
+
+  handleButton = async () => {
+    const { dispatch } = this.props;
+    const url = 'https://economia.awesomeapi.com.br/json/all';
+    const response = await fetch(url);
+    const data = await response.json();
+    delete data.USDT;///
+    const { id } = this.state;
+    this.setState({
+      exchangeRates: data,
+    }, async () => {
+      await dispatch(expensesIncluded(this.state));
+      this.setState({
+        id: id + 1,
+        value: '',
+        description: '',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'Alimentação',
+      });
+    });
   };
 
   render() {
@@ -95,6 +119,12 @@ class WalletForm extends Component {
             <option value="Saúde">Saúde</option>
           </select>
         </form>
+        <button
+          type="button"
+          onClick={ this.handleButton }
+        >
+          Adicionar despesa
+        </button>
       </div>
     );
   }

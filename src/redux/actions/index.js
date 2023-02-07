@@ -1,6 +1,7 @@
 // ACTION TYPE
 export const EMAIL_SAVED = 'EMAIL_SAVED';
 export const CURRENCIES = 'CURRENCIES';
+export const EXPENSES_INCLUDED = 'EXPENSES_INCLUDED';
 
 // ACTION CREATOR
 export const saveEmail = (email) => ({
@@ -12,6 +13,11 @@ const url = 'https://economia.awesomeapi.com.br/json/all';
 
 export const currenciesType = (payload) => ({
   type: CURRENCIES,
+  payload,
+});
+
+export const expensesIncluded = (payload) => ({
+  type: EXPENSES_INCLUDED,
   payload,
 });
 
