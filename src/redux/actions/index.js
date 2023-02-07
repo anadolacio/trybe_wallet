@@ -2,6 +2,7 @@
 export const EMAIL_SAVED = 'EMAIL_SAVED';
 export const CURRENCIES = 'CURRENCIES';
 export const EXPENSES_INCLUDED = 'EXPENSES_INCLUDED';
+export const EXPENSES_EXCLUDED = 'EXPENSES_EXCLUDED';
 
 // ACTION CREATOR
 export const saveEmail = (email) => ({
@@ -18,6 +19,11 @@ export const currenciesType = (payload) => ({
 
 export const expensesIncluded = (payload) => ({
   type: EXPENSES_INCLUDED,
+  payload,
+});
+
+export const expensesExcluded = (payload) => ({
+  type: EXPENSES_EXCLUDED,
   payload,
 });
 
