@@ -8,9 +8,9 @@ class WalletForm extends Component {
     id: 0,
     value: '',
     description: '',
-    currency: '',
-    method: '',
-    tag: '',
+    currency: 'USD',
+    method: 'Dinheiro',
+    tag: 'Alimentação',
     // expenses: [],
   };
 
@@ -100,6 +100,7 @@ class WalletForm extends Component {
           <select
             data-testid="method-input"
             value={ method }
+            name="method"
             onChange={ this.handleChange }
           >
             <option value="Dinheiro">Dinheiro</option>
@@ -110,6 +111,7 @@ class WalletForm extends Component {
           <select
             data-testid="tag-input"
             value={ tag }
+            name="tag"
             onChange={ this.handleChange }
           >
             <option value="Alimentação">Alimentação</option>
